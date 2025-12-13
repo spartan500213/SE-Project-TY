@@ -1,22 +1,22 @@
-// App.jsx
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
 
-import { useState } from "react";
-
-const App = () => {
-	const [heading, setHeading] = useState("Magnificent Monkeys");
-
-	const handleClick = () => {
-		setHeading("Radical Rhinos")
-	}
-
+function App() {
 	return (
-		<>
-			<button type="button" onClick={handleClick}>
-				Click Me
-			</button>
-			<h1>{heading}</h1>
-		</>
-	)
+		<AuthProvider>
+			<Router>
+				{/* Navbar stays visible on all pages */}
+				<Navbar />
+
+				{/* Center page content below the navbar */}
+				<div className="flex justify-center mt-10">
+					<AppRoutes />
+				</div>
+			</Router>
+		</AuthProvider>
+	);
 }
 
 export default App;
